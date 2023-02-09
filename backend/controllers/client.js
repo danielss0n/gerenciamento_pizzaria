@@ -19,7 +19,7 @@ module.exports = class clientCONTROLLER {
     static async pedido(req, res) {
 
         //dados da requisição
-        const {
+        var {
             sabores,
             tamanho,
             borda,
@@ -67,9 +67,14 @@ module.exports = class clientCONTROLLER {
             } 
         }
 
-        //verificar se produto existe
-        if(!produto.includes(produtos_array_nomes)){
-            res.status(404).json({mensagem:`Produto ${produto} não encontrado`})
+        //verificar se existe o tamanho e a borda na requisição
+        if(!tamanho || tamanho === ""){
+            res.status(422).json({mensagem:`Escolha o tamanho da pizza`})
+            return
+        }
+   
+        if(!borda || borda === ""){
+            res.status(422).json({mensagem:`Escolha a borda da pizza`})
             return
         }
 
@@ -82,13 +87,29 @@ module.exports = class clientCONTROLLER {
             res.status(422).json({message: "Escolha uma forma de retirada"})
             return
         }
-        
-        //procura o produto e calcular o preço do pedido
-        const produto_data = await Produto.find({'nome': produto})
-        const preco_produto = parseFloat(produto_data[0].preco_venda)
+
+        console.log(req.body)
+        //verificações do produto
+        let preco_produto = 0
+        if(!produto){
+            preco_produto == 0
+        } else {
+            //procura o produto e calcular o preço do pedido
+            const produto_data = await Produto.find({'nome': produto})
+
+            //verificar se produto existe
+            if(produto_data.length == 0){
+                res.status(422).json({message: `Produto ${produto} não encontrado`})
+                return
+            }    
+
+            preco_produto = produto_data[0].preco_venda
+        }
+    
+        //calcula preço total
         const preco_pizza = 50
         const preco_total = preco_pizza + preco_produto
-
+        
         //cria o objeto do pedido
         const pedido = new Pedido({
             pizza: {
@@ -97,9 +118,7 @@ module.exports = class clientCONTROLLER {
                 borda,
             },
             observacoes,
-            produto: {
-                produto,
-            },
+            produto,
             preco_total,
             status: "Em preparação",
             entrega,
@@ -113,4 +132,5 @@ module.exports = class clientCONTROLLER {
             res.status(500).json({mensagem:error})
         }
     }
+
 }

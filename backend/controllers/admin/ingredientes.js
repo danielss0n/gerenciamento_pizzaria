@@ -119,7 +119,7 @@ module.exports = class ingredientesCONTROLLER {
 
     }
 
-    static async removerIngredientesEstoque(req, res){
+    static async removerIngredienteEstoque(req, res){
 
         //declarar variaveis da requisição
         const id = req.params.id

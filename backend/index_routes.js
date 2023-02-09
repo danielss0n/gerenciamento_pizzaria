@@ -13,7 +13,7 @@ router.post('/client/pedido', clientCONTROLLER.pedido)
 //SABORES
 router.post('/admin/cadastrarSabor', saboresCONTROLLER.cadastrarSabor)
 router.patch('/admin/estoque/sabores/:id', saboresCONTROLLER.atualizarSabor)
-router.delete('/admin/sabores/:id', saboresCONTROLLER.removerSabor)
+router.delete('/admin/estoque/sabores/:id', saboresCONTROLLER.removerSabor)
 //PRODUTOS
 router.post('/admin/cadastrarProduto', produtosCONTROLLER.cadastrarProduto)
 router.patch('/admin/estoque/produtos/:id', produtosCONTROLLER.atualizarProduto)
@@ -22,7 +22,7 @@ router.delete('/admin/estoque/produtos/:id', produtosCONTROLLER.removerProduto)
 //INGREDIENTES
 router.post('/admin/cadastrarIngrediente', ingredientesCONTROLLER.cadastrarIngredientesEstoque)
 router.patch('/admin/cadastrarIngrediente', ingredientesCONTROLLER.atualizarIngredientesEstoque)
-// router.delete('/admin/ingredientes/:id', ingredientesCONTROLLER.removerIngredienteEstoque)
+router.delete('/admin/estoque/ingredientes/:id', ingredientesCONTROLLER.removerIngredienteEstoque)
 
 //ROTAS ADMIN PEDIDOS
 router.get('/admin/pedidos', pedidoCONTROLLER.mostrarPedidos)

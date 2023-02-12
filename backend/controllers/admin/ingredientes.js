@@ -4,6 +4,14 @@ const Ingrediente = require('../../models/estoque/Ingrediente')
 
 module.exports = class ingredientesCONTROLLER {
 
+
+    static async mostrarIgredientes(req, res) {
+        const ingredientes_cadastrados = await Ingrediente.find()
+        res.status(200).json({
+            ingredientes_cadastrados
+        })
+    }
+
     static async cadastrarIngredientesEstoque(req, res) {
 
         //declarar variaveis da requisição

@@ -11,7 +11,8 @@ module.exports = class saboresCONTROLLER {
             nome,
             descricao,
             ingredientes,
-            imagem
+            imagem,
+            preco
         } = req.body
 
         //procurando os ingredientes
@@ -24,6 +25,7 @@ module.exports = class saboresCONTROLLER {
         novo_sabor_data.descricao = descricao
         novo_sabor_data.ingredientes = ingredientes
         novo_sabor_data.imagem = imagem
+        novo_sabor_data.preco = preco
 
         //verificações obrigatórias
         if(!nome){
@@ -42,6 +44,9 @@ module.exports = class saboresCONTROLLER {
         if(!descricao){
             novo_sabor_data.descricao = "Direto do forno da nossa pizzaria"
         }
+        if(!preco){
+            novo_sabor_data.preco = 10
+        }
         
         //verificar os ingredientes na requisiçao existem
         const quantia_ingredientes = Object.keys(ingredientes).length
@@ -59,7 +64,7 @@ module.exports = class saboresCONTROLLER {
             nome: novo_sabor_data.nome,
             descricao: novo_sabor_data.descricao,
             ingredientes: novo_sabor_data.ingredientes,
-            preco:10,
+            preco: novo_sabor_data.preco,
             imagem: novo_sabor_data.imagem = imagem,
         })
 

@@ -9,7 +9,7 @@ module.exports = class clientCONTROLLER {
         
         const pedidos_cadastrados = await Pedido.find()
         res.status(200).json({
-            pedidos
+            pedidos_cadastrados
         })
 
     }
@@ -36,10 +36,10 @@ module.exports = class clientCONTROLLER {
         //verificar tipo de entrega
         const updated_data = {}
         if(pedido.entrega === "Delivery"){
-            updated_data.status = "Pizza sendo entregue pelo Delivery"
+            updated_data.status = "Pizza pronta"
         }
         if(pedido.entrega === "Retirada"){
-            updated_data.status = "Pizza pronta para ser retirada"
+            updated_data.status = "Pizza pronta"
         }
 
         //cadastrar no bd

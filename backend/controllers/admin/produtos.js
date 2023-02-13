@@ -19,6 +19,7 @@ module.exports = class produtosCONTROLLER {
 
         //declarar objeto
         const novo_produto_data = {}
+        console.log(categoria)
         novo_produto_data.quantia_comprada = parseInt(quantia_comprada)
         novo_produto_data.gastos_compra = parseFloat(gastos_compra)
         novo_produto_data.preco_venda = parseFloat(preco_venda)
@@ -51,7 +52,8 @@ module.exports = class produtosCONTROLLER {
         if(!imagem || imagem == null){
             novo_produto_data.imagem = "default.jpg"
         }
-
+        novo_produto_data.categoria = categoria
+        
         //declarar o objeto para cadastro no db
         const produto = new Produto({
             nome,
@@ -62,6 +64,7 @@ module.exports = class produtosCONTROLLER {
             imagem: novo_produto_data.imagem,
         })
 
+        console.log(produto)
         //cadastro no db
         try {
             const cadastrar_produto = await produto.save()
